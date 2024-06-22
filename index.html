@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+    <style>
+        body{
+            background-color:wheat;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: 0;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1{
+            font-size: 80px;
+        }
+        .choices{
+             margin-bottom: 50px;
+        }
+        .choices button{
+            font-size: 50px;
+            min-width: 100px;
+            margin: 20px;
+            cursor: pointer;
+        }
+        #player{
+            font-size: 50px;
+        }
+        #computer{
+            margin: 20px;
+            font-size: 50px;
+        }
+        #result{
+            margin: 20px;
+            font-size: 80px;
+        }
+        .win{
+            color: green;
+        }
+        .lose{
+            color: red;
+        }
+        .tie{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rock - Paper - Scissors</h1>
+
+    <div id="result"></div>
+    <div id="player">PLAYER:</div>
+    <div id="computer">Computer:</div>
+    
+
+    <div class="choices">
+        <button onclick="play('rock')">👊</button>
+        <button onclick="play('paper')">✋</button>
+        <button onclick="play('scissors')">✌</button>
+    </div>
+
+    <script>
+        const choices = ["rock","paper","scissors"]
+        const player = document.getElementById("player");
+        const computer = document.getElementById("computer");
+        const result = document.getElementById("result");
+
+        function getComputerChoice() {
+            return choices[Math.floor(Math.random() * 3)];
+        }
+
+        function determineWinner(playerChoice, computerChoice) {
+            return playerChoice === computerChoice ? "IT'S A TIE" :
+                   (playerChoice === "rock" && computerChoice === "scissors") || 
+                   (playerChoice === "paper" && computerChoice === "rock") || 
+                   (playerChoice === "scissors" && computerChoice === "paper") ? "PLAYER WINS!" : "COMPUTER WINS!";
+        }
+
+        function play(playerChoice) {
+            const computerChoice = getComputerChoice();
+            player.textContent = `PLAYER: ${playerChoice.toUpperCase()}`;
+            computer.textContent = `COMPUTER: ${computerChoice.toUpperCase()}`;
+            let winner = determineWinner(playerChoice, computerChoice);
+            result.textContent = winner;
+            result.className = winner === "PLAYER WINS!" ? "win" : winner === "COMPUTER WINS!" ? "lose" : "tie";
+        }
+    </script>
+</body>
+</html>
